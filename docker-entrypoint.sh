@@ -62,7 +62,7 @@ if [ "$1" = 'redis-cluster' ]; then
       fi
 
       if [ "$port" -lt "$first_standalone" ]; then
-        PORT=${port} BIND_ADDRESS=${BIND_ADDRESS} envsubst < /redis-conf/redis-cluster.tmpl > /redis-conf/${port}/redis.conf
+        PORT=${port} BIND_ADDRESS=${BIND_ADDRESS} PROTECTED_MODE=${protectedmode} envsubst < /redis-conf/redis-cluster.tmpl > /redis-conf/${port}/redis.conf
         nodes="$nodes $IP:$port"
       else
         PORT=${port} BIND_ADDRESS=${BIND_ADDRESS} envsubst < /redis-conf/redis.tmpl > /redis-conf/${port}/redis.conf
