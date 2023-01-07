@@ -30,6 +30,12 @@ if [ "$1" = 'redis-cluster' ]; then
       BIND_ADDRESS=0.0.0.0
     fi
 
+    if [ -z "$PROTECTED_MODE" -o "$PROTECTED_MODE" = "true" ]; then
+      protectedmode="protected-mode yes"
+    elif [ "$PROTECTED_MODE" = "false" ]; then
+      protectedmode="protected-mode no"
+    fi
+      
     max_port=$(($INITIAL_PORT + $MASTERS * ( $SLAVES_PER_MASTER  + 1 ) - 1))
     first_standalone=$(($max_port + 1))
     if [ "$STANDALONE" = "true" ]; then
